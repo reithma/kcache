@@ -5,12 +5,17 @@
  * For more details on building Java & JVM projects, please refer to https://docs.gradle.org/9.2.1/userguide/building_java_projects.html in the Gradle documentation.
  */
 
+import org.jetbrains.kotlin.gradle.ExperimentalKotlinGradlePluginApi
+
 plugins {
     // Apply the org.jetbrains.kotlin.jvm Plugin to add support for Kotlin.
     alias(libs.plugins.kotlin.jvm)
 
     // Apply the java-library plugin for API and implementation separation.
     `java-library`
+
+    // Kotlin compiler Power Assert plugin (K2/JVM)
+    alias(libs.plugins.power.assert)
 }
 
 repositories {
@@ -19,19 +24,15 @@ repositories {
 }
 
 dependencies {
-    // Use the Kotlin Test integration.
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
+    // Coroutines
+    implementation(libs.kotlinx.coroutines.core)
 
-    // Use the JUnit 5 integration.
+    // Testing
+    testImplementation(libs.kotlin.test)
+    testImplementation(libs.junit.jupiter.api)
     testImplementation(libs.junit.jupiter.engine)
-
+    testImplementation(libs.kotlinx.coroutines.test)
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-
-    // This dependency is exported to consumers, that is to say found on their compile classpath.
-    api(libs.commons.math3)
-
-    // This dependency is used internally, and not exposed to consumers on their own compile classpath.
-    implementation(libs.guava)
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
@@ -44,4 +45,19 @@ java {
 tasks.named<Test>("test") {
     // Use JUnit Platform for unit tests.
     useJUnitPlatform()
+}
+
+@OptIn(ExperimentalKotlinGradlePluginApi::class)
+powerAssert {
+    // Configure assertion functions to be enhanced by Kotlin Power Assert
+    functions = listOf(
+        "kotlin.assert",
+        "kotlin.test.assertTrue",
+        "kotlin.test.assertEquals",
+        "kotlin.test.assertNotEquals",
+        "kotlin.test.assertNull",
+        "kotlin.test.assertNotNull"
+    )
+    // By default, the plugin applies to test source sets; customize if needed with includedSourceSets
+    // includedSourceSets = listOf("test")
 }
