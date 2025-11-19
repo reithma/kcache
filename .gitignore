@@ -1,0 +1,61 @@
+###############################
+# Kotlin + IDEs .gitignore
+# Project: kcache
+# Scope: keep only Kotlin/Gradle and IntelliJ/VS Code related entries
+###############################
+
+# Gradle
+.gradle/
+build/
+
+# IntelliJ / JetBrains IDEs
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+.idea/**/aws.xml
+.idea/**/contentModel.xml
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+.idea/**/dbnavigator.xml
+.idea/**/gradle.xml
+.idea/**/libraries
+.idea/caches/build_file_checksums.ser
+.idea/httpRequests
+
+# IntelliJ project/module files (auto-generated)
+.idea/artifacts
+.idea/compiler.xml
+.idea/jarRepositories.xml
+.idea/modules.xml
+.idea/modules
+.idea/*.iml
+*.iml
+*.ipr
+*.iws
+
+# IntelliJ build output
+out/
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/*.code-snippets
+.history/
+*.vsix
+
+# Kotlin/Java compiled + logs
+*.class
+*.log
+
+# JVM crash logs
+hs_err_pid*
+replay_pid*
