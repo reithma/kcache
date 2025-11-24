@@ -12,3 +12,4 @@ plugins {
 
 rootProject.name = "kcache"
 include("lib")
+include("examples")
