@@ -15,7 +15,7 @@ Kotlin Coroutine Abstraction Cache Holder Engine, a lightweight, thread-safe cac
 
 ### Basic In-Memory Cache
 
-You can use `CachedValue` as a simple holder for data that needs to be accessed safely.
+You can use `CachedValue` as a simple holder for non-nullable data that needs to be accessed safely.
 
 ```kotlin
 val cache = CachedValue<String>()
@@ -93,7 +93,7 @@ configCache.refresh()
 
 ## API Overview
 
-### Main Class: `CachedValue<T>`
+### Main Class: `CachedValue<T: Any>`
 
 | Method | Description |
 |--------|-------------|

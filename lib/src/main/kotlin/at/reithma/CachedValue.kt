@@ -11,11 +11,12 @@ import kotlinx.coroutines.sync.withLock
 /**
  * Thread-safe cache with support for Read-Through and Write-Through patterns.
  *
+ * @param T The type of the cached value. Must be non-nullable.
  * @param initialValue Optional initial value.
  * @param retrieveFunction Function to fetch value if missing.
  * @param storageFunction Function to persist value on updates.
  */
-class CachedValue<T>(
+class CachedValue<T: Any>(
     initialValue: T? = null,
     private var retrieveFunction: (suspend () -> T?)? = null,
     private var storageFunction: (suspend (T) -> Unit)? = null,
