@@ -82,6 +82,7 @@ class CachedValueTest {
         // Given
         val retrieveCalled = AtomicInteger(0)
         val storeCalled = AtomicInteger(0)
+        var storedValue = ""
 
         val cachedValue = CachedValue<String>(
             retrieveFunction = {
@@ -90,10 +91,14 @@ class CachedValueTest {
             },
             storageFunction = {
                 storeCalled.incrementAndGet()
+                storedValue = it
             }
         )
 
         // Initial state: memory empty
+        assertEquals(0, retrieveCalled.get(), "Retrieve should not be called initially")
+        assertEquals(0, storeCalled.get(), "Store should not be called initially")
+        assertEquals("", storedValue, "Stored value should be empty initially")
 
         // When
         val result = cachedValue.sync()
@@ -103,6 +108,7 @@ class CachedValueTest {
         assertEquals("synced", cachedValue.get())
         assertEquals(1, retrieveCalled.get(), "Should retrieve once")
         assertEquals(1, storeCalled.get(), "Should store once")
+        assertEquals("synced", storedValue, "Should store the correct value")
     }
 
     @Test
