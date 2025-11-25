@@ -48,7 +48,7 @@ class CachedValueTest {
     }
 
     @Test
-    fun `concurrent store calls should persist correctly`() = runTest {
+    fun `should save data synchronously`() = runTest {
         // Given
         val cachedValue = CachedValue<Int>(0)
         val storageCount = AtomicInteger(0)
